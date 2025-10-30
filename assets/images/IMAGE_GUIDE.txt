@@ -1,0 +1,66 @@
+📸 IMAGE PLACEMENT GUIDE
+========================
+
+Add your images to this folder with the exact filenames listed below.
+The website will automatically detect and display them!
+
+REQUIRED IMAGES:
+----------------
+
+1. profile.jpg (or profile.png)
+   - Your professional headshot
+   - Size: 400x400px (square recommended)
+   - Format: JPG or PNG
+   - Used in: Hero section
+
+2. audio-pdm.jpg
+   - Screenshot of PyQt dashboard or FFT visualization
+   - Size: 800x500px recommended
+   - Format: JPG or PNG
+   - Used in: Projects section
+
+3. ethernet-audio.jpg
+   - Architecture diagram or demo screenshot
+   - Size: 800x500px recommended
+   - Format: JPG or PNG
+   - Used in: Projects section
+
+4. crane-system.jpg
+   - System diagram, demo video thumbnail, or photo
+   - Size: 1000x600px recommended
+   - Format: JPG or PNG
+   - Used in: Experience section (Crane Anti-Collision System)
+
+5. ticad8-award.jpg
+   - Photo from TICAD8 hackathon award ceremony
+   - Size: 600x400px recommended
+   - Format: JPG
+   - Used in: Awards section
+
+6. industrie40-award.jpg
+   - Photo from Industrie 4.0 hackathon
+   - Size: 600x400px recommended
+   - Format: JPG
+   - Used in: Awards section
+
+7. botcamp-award.jpg
+   - Photo from BOT Camp hackathon
+   - Size: 600x400px recommended
+   - Format: JPG
+   - Used in: Awards section
+
+TIPS:
+-----
+✓ Use exact filenames (case-sensitive on some systems)
+✓ Optimize images before uploading (use TinyPNG.com)
+✓ Keep file sizes under 500KB for faster loading
+✓ JPG for photos, PNG for diagrams with transparency
+✓ Test the website after adding images
+
+OPTIONAL ADDITIONS:
+-------------------
+You can add more project images by:
+1. Adding the image to this folder
+2. Updating the corresponding <img> tag in index.html
+
+Need help? Check the README.md file for more details!
