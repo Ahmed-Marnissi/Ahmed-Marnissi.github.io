@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260">
+  <defs>
+    <style>
+      .box { fill: #f7f7f7; stroke: #2c3e50; stroke-width: 2; }
+      .title { font: 16px sans-serif; fill: #2c3e50; }
+      .label { font: 14px sans-serif; fill: #2c3e50; }
+      .arrow { stroke: #2c3e50; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="30" class="title">Phase Shift Measurement Flow</text>
+
+  <rect x="30" y="70" width="180" height="70" rx="8" class="box"/>
+  <text x="46" y="110" class="label">Input Signals</text>
+
+  <rect x="260" y="70" width="180" height="70" rx="8" class="box"/>
+  <text x="278" y="100" class="label">Buffer Samples</text>
+  <text x="292" y="122" class="label">(SIGNAL_LENGTH)</text>
+
+  <rect x="490" y="70" width="190" height="70" rx="8" class="box"/>
+  <text x="508" y="110" class="label">Cross-Correlation</text>
+
+  <rect x="720" y="70" width="150" height="70" rx="8" class="box"/>
+  <text x="744" y="100" class="label">Peak Delay</text>
+  <text x="748" y="122" class="label">Time Shift</text>
+
+  <rect x="600" y="170" width="220" height="70" rx="8" class="box"/>
+  <text x="620" y="200" class="label">Phase Calculation</text>
+  <text x="632" y="222" class="label">theta = td * f * 360</text>
+
+  <path d="M210 105 L260 105" class="arrow"/>
+  <path d="M440 105 L490 105" class="arrow"/>
+  <path d="M680 105 L720 105" class="arrow"/>
+  <path d="M795 140 L710 170" class="arrow"/>
+</svg>

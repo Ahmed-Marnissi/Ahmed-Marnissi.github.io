@@ -32,7 +32,7 @@ Add the following images to the `assets/images/` folder:
 - **Description**: Your professional headshot
 
 #### 2. **Project Screenshots**
-- **File**: `audio-pdm.jpg`
+- **File**: `audio_pdm.gif`
   - Screenshot of your PyQt dashboard or waveform visualization
   - Recommended size: 800x500px
 

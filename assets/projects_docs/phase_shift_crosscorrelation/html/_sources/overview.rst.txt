@@ -1,0 +1,23 @@
+Overview
+========
+
+This project implements a phase shift measurement library for STM32
+microcontrollers. It computes the phase difference between two periodic
+signals (for example, voltage and current) using cross-correlation from
+CMSIS-DSP.
+
+Features
+--------
+
+- Phase shift computation between two signals
+- Cross-correlation based on CMSIS-DSP
+- Real-time signal processing with a fixed sample buffer
+- Configurable sampling frequency and signal frequency
+- Compatible with STM32CubeMonitor for visualization
+
+Demo
+----
+
+.. image:: _static/AnimationShift.gif
+   :alt: STM32CubeMonitor phase shift demo
+   :width: 640

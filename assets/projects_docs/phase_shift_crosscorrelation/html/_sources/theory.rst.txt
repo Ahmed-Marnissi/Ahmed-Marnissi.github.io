@@ -1,0 +1,31 @@
+Theory
+======
+
+When two periodic signals are phase shifted, one appears as a time-shifted
+version of the other. Cross-correlation estimates this time shift by measuring
+similarity across lags. The peak correlation indicates the delay.
+
+Cross-correlation
+-----------------
+
+.. math::
+
+   R_{xy}(\tau) = \sum x(t)\,y(t+\tau)
+
+Where:
+
+- :math:`R_{xy}(\tau)` is the cross-correlation.
+- :math:`x(t)` and :math:`y(t)` are the two signals.
+- :math:`\tau` is the time shift.
+
+Phase shift
+-----------
+
+Once the time delay :math:`t_d` is obtained from the peak index, the phase
+shift in degrees is:
+
+.. math::
+
+   \theta = t_d \cdot f \cdot 360.0
+
+Where :math:`f` is the signal frequency in Hz.

@@ -1,0 +1,16 @@
+Phase Shift Cross-Correlation
+=============================
+
+Sphinx documentation for the STM32 phase shift measurement library using
+cross-correlation and CMSIS-DSP.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   overview
+   getting_started
+   architecture
+   theory
+   usage
+   api
