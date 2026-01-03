@@ -52,6 +52,15 @@ body {
 
 .section {
     padding: 5rem 0;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+}
+
+.section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title {

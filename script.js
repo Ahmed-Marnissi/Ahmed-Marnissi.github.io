@@ -126,6 +126,20 @@ document.querySelectorAll('.skill-category, .project-card, .award-card, .timelin
     observer.observe(el);
 });
 
+// ===== Section Reveal =====
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            sectionObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+document.querySelectorAll('.section').forEach(section => {
+    sectionObserver.observe(section);
+});
+
 // ===== Profile Image Handler =====
 const profileImg = document.getElementById('profile-img');
 
