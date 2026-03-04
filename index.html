@@ -1,559 +1,558 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ahmed Marnissi - Embedded Software Engineer specializing in ARM, FreeRTOS, QNX, and real-time systems">
-    <meta name="author" content="Ahmed Marnissi">
-    <title>Ahmed Marnissi | Embedded Software Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Marnissi | Embedded Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg:        #080c14;
+  --bg2:       #0d1220;
+  --bg3:       #111827;
+  --cyan:      #00d4ff;
+  --cyan-dim:  rgba(0,212,255,0.12);
+  --amber:     #f59e0b;
+  --amber-dim: rgba(245,158,11,0.12);
+  --green:     #22c55e;
+  --text:      #e2e8f0;
+  --muted:     #64748b;
+  --border:    rgba(0,212,255,0.15);
+  --mono:      'JetBrains Mono', monospace;
+  --sans:      'DM Sans', sans-serif;
+  --glow:      0 0 20px rgba(0,212,255,0.25);
+  --glow-sm:   0 0 8px rgba(0,212,255,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image: linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);
+  background-size:40px 40px; pointer-events:none; z-index:0;
+}
+.container { max-width:1100px; margin:0 auto; padding:0 2rem; position:relative; z-index:1; }
+
+/* NAV */
+.navbar { position:fixed; top:0; left:0; right:0; z-index:1000; padding:1rem 0; background:rgba(8,12,20,0.9); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+.nav-inner { max-width:1100px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:var(--mono); font-size:1rem; color:var(--cyan); text-decoration:none; letter-spacing:0.05em; }
+.nav-logo span { color:var(--muted); }
+.nav-links { display:flex; gap:1.6rem; list-style:none; }
+.nav-links a { font-family:var(--mono); font-size:0.78rem; color:var(--muted); text-decoration:none; letter-spacing:0.08em; transition:color 0.2s; }
+.nav-links a:hover { color:var(--cyan); }
+.nav-links a::before { content:'./'; color:var(--cyan); opacity:0; transition:opacity 0.2s; }
+.nav-links a:hover::before { opacity:1; }
+
+/* HERO */
+.hero { min-height:100vh; display:flex; align-items:center; padding-top:80px; position:relative; }
+.hero-inner { display:grid; grid-template-columns:1fr auto; gap:5rem; align-items:center; width:100%; max-width:1100px; margin:0 auto; padding:0 2rem; }
+.hero-eyebrow { font-family:var(--mono); font-size:0.8rem; color:var(--cyan); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.75rem; }
+.hero-eyebrow::before { content:''; width:32px; height:1px; background:var(--cyan); }
+.hero-name { font-family:var(--mono); font-size:clamp(2.4rem,5vw,4rem); font-weight:700; line-height:1.1; letter-spacing:-0.02em; margin-bottom:0.5rem; color:#fff; }
+.hero-name .highlight { color:var(--cyan); text-shadow:var(--glow); }
+.hero-title { font-family:var(--mono); font-size:1rem; color:var(--muted); margin-bottom:1.5rem; letter-spacing:0.05em; min-height:1.5rem; }
+.cursor { display:inline-block; width:2px; height:1em; background:var(--cyan); margin-left:4px; vertical-align:middle; animation:blink 1s step-end infinite; }
+@keyframes blink { 50%{opacity:0;} }
+.hero-desc { font-size:1rem; color:var(--muted); max-width:540px; margin-bottom:2rem; line-height:1.7; }
+.hero-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:2.5rem; }
+.tag { font-family:var(--mono); font-size:0.72rem; padding:4px 10px; border:1px solid var(--border); border-radius:4px; color:var(--cyan); background:var(--cyan-dim); letter-spacing:0.04em; transition:all 0.2s; cursor:default; }
+.tag:hover { background:rgba(0,212,255,0.2); border-color:var(--cyan); box-shadow:var(--glow-sm); }
+.hero-actions { display:flex; gap:1rem; align-items:center; margin-bottom:2.5rem; }
+.btn-primary { font-family:var(--mono); font-size:0.82rem; padding:0.7rem 1.6rem; background:var(--cyan); color:var(--bg); border:none; border-radius:4px; text-decoration:none; font-weight:700; letter-spacing:0.06em; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.5rem; }
+.btn-primary:hover { background:#fff; box-shadow:var(--glow); transform:translateY(-1px); }
+.btn-secondary { font-family:var(--mono); font-size:0.82rem; padding:0.7rem 1.6rem; background:transparent; color:var(--cyan); border:1px solid var(--border); border-radius:4px; text-decoration:none; font-weight:500; letter-spacing:0.06em; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.5rem; }
+.btn-secondary:hover { border-color:var(--cyan); background:var(--cyan-dim); box-shadow:var(--glow-sm); }
+.hero-socials { display:flex; gap:1rem; }
+.hero-socials a { width:38px; height:38px; border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:0.9rem; text-decoration:none; transition:all 0.2s; }
+.hero-socials a:hover { color:var(--cyan); border-color:var(--cyan); background:var(--cyan-dim); box-shadow:var(--glow-sm); }
+.hero-avatar { position:relative; flex-shrink:0; }
+.avatar-frame { width:280px; height:280px; border-radius:8px; border:1px solid var(--border); overflow:hidden; position:relative; box-shadow:var(--glow); }
+.avatar-frame img { width:100%; height:100%; object-fit:cover; display:block; }
+.avatar-frame::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,212,255,0.1),transparent 60%); z-index:1; pointer-events:none; }
+.avatar-corner { position:absolute; width:16px; height:16px; border-color:var(--cyan); border-style:solid; }
+.avatar-corner.tl { top:-4px; left:-4px; border-width:2px 0 0 2px; }
+.avatar-corner.tr { top:-4px; right:-4px; border-width:2px 2px 0 0; }
+.avatar-corner.bl { bottom:-4px; left:-4px; border-width:0 0 2px 2px; }
+.avatar-corner.br { bottom:-4px; right:-4px; border-width:0 2px 2px 0; }
+.avatar-badge { position:absolute; bottom:-12px; left:-12px; background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:0.6rem 1rem; font-family:var(--mono); font-size:0.7rem; color:var(--cyan); white-space:nowrap; box-shadow:var(--glow-sm); }
+.avatar-badge .dot { display:inline-block; width:6px; height:6px; background:var(--green); border-radius:50%; margin-right:6px; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4);} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0);} }
+
+/* SECTION COMMON */
+.section { padding:6rem 0; }
+.sec-label { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.25em; text-transform:uppercase; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.75rem; }
+.sec-label::before { content:'//'; opacity:0.5; }
+.sec-title { font-family:var(--mono); font-size:2rem; font-weight:700; color:#fff; margin-bottom:0.5rem; letter-spacing:-0.02em; }
+.sec-rule { width:48px; height:2px; background:var(--cyan); box-shadow:var(--glow-sm); margin-bottom:3rem; }
+
+/* ABOUT */
+.about { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.about-grid { display:grid; grid-template-columns:1fr 320px; gap:4rem; align-items:start; }
+.about-text p { color:var(--muted); font-size:1rem; line-height:1.85; margin-bottom:1.4rem; }
+.about-text p strong { color:var(--text); }
+.about-stats { display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+.stat-row { background:var(--bg3); padding:1.4rem 1.6rem; border-bottom:1px solid var(--border); transition:background 0.2s; }
+.stat-row:last-child { border-bottom:none; }
+.stat-row:hover { background:rgba(0,212,255,0.04); }
+.stat-val { font-family:var(--mono); font-size:2.2rem; font-weight:700; color:var(--cyan); line-height:1; margin-bottom:0.3rem; }
+.stat-key { font-family:var(--mono); font-size:0.72rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+
+/* SKILLS */
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.skill-block { background:var(--bg2); padding:1.6rem; transition:background 0.2s; }
+.skill-block:hover { background:rgba(0,212,255,0.03); }
+.skill-block-title { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+.skill-block-title i { opacity:0.7; }
+.skill-pills { display:flex; flex-wrap:wrap; gap:6px; }
+.pill { font-family:var(--mono); font-size:0.72rem; padding:3px 9px; border:1px solid rgba(0,212,255,0.2); border-radius:3px; color:#94a3b8; background:rgba(0,212,255,0.04); transition:all 0.15s; }
+.pill:hover { color:var(--cyan); border-color:var(--cyan); background:var(--cyan-dim); }
+
+/* EXPERIENCE */
+.experience { background:var(--bg2); border-top:1px solid var(--border); }
+.timeline { position:relative; padding-left:2px; }
+.timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(180deg,var(--cyan),rgba(0,212,255,0.1)); }
+.tl-item { position:relative; padding:0 0 3rem 2.5rem; }
+.tl-dot { position:absolute; left:-5px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--cyan); box-shadow:var(--glow-sm); border:2px solid var(--bg2); }
+.tl-period { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.1em; margin-bottom:0.5rem; }
+.tl-role { font-family:var(--mono); font-size:1.15rem; font-weight:600; color:#fff; margin-bottom:0.2rem; }
+.tl-company { font-family:var(--mono); font-size:0.8rem; color:var(--muted); margin-bottom:1.5rem; }
+.project-block { background:var(--bg3); border:1px solid var(--border); border-left:2px solid var(--cyan); border-radius:0 6px 6px 0; padding:1.4rem 1.6rem; margin-bottom:1rem; transition:all 0.2s; }
+.project-block:hover { background:rgba(0,212,255,0.03); box-shadow:var(--glow-sm); }
+.project-block-title { font-family:var(--mono); font-size:0.82rem; color:var(--amber); letter-spacing:0.05em; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
+.project-block-title::before { content:'▶'; font-size:0.6rem; }
+.project-block ul { padding-left:1rem; }
+.project-block li { font-size:0.9rem; color:var(--muted); margin-bottom:0.4rem; line-height:1.6; }
+.project-block li strong { color:var(--text); }
+.tl-stack { font-family:var(--mono); font-size:0.7rem; color:var(--muted); background:var(--bg3); border:1px solid var(--border); border-radius:4px; padding:0.6rem 1rem; margin-top:0.5rem; letter-spacing:0.03em; }
+.tl-stack span { color:var(--cyan); margin-right:6px; }
+
+/* PROJECTS */
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.proj-img { width:100%; height:200px; object-fit:cover; display:block; border-bottom:1px solid var(--border); filter:brightness(0.85) saturate(0.9); transition:filter 0.3s; }
+.proj-card:hover .proj-img { filter:brightness(1) saturate(1); }
+.proj-card { background:var(--bg2); padding:0; transition:background 0.2s; position:relative; overflow:hidden; }
+.proj-card-body { padding:1.6rem 2rem 2rem; }
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cyan),transparent); opacity:0; transition:opacity 0.2s; }
+.proj-card:hover { background:rgba(0,212,255,0.03); }
+.proj-card:hover::before { opacity:1; }
+.proj-num { font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.15em; margin-bottom:0.75rem; }
+.proj-title { font-family:var(--mono); font-size:1rem; font-weight:600; color:#fff; margin-bottom:0.75rem; }
+.proj-desc { font-size:0.88rem; color:var(--muted); line-height:1.65; margin-bottom:1.25rem; }
+.proj-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.25rem; }
+.proj-tag { font-family:var(--mono); font-size:0.68rem; padding:2px 7px; border:1px solid rgba(245,158,11,0.25); border-radius:3px; color:var(--amber); background:var(--amber-dim); }
+.proj-links { display:flex; gap:1rem; }
+.proj-link { font-family:var(--mono); font-size:0.75rem; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+.proj-link:hover { color:var(--cyan); }
+
+/* AWARDS */
+.awards { background:var(--bg2); border-top:1px solid var(--border); }
+.awards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; }
+.award-card { background:var(--bg3); border:1px solid var(--border); border-radius:6px; padding:1.8rem; transition:all 0.2s; position:relative; overflow:hidden; }
+.award-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--amber),transparent); }
+.award-card:hover { border-color:rgba(245,158,11,0.3); box-shadow:0 0 20px rgba(245,158,11,0.1); transform:translateY(-2px); }
+.award-rank { font-family:var(--mono); font-size:0.7rem; color:var(--amber); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem; }
+.award-rank i { font-size:0.9rem; }
+.award-title { font-family:var(--mono); font-size:0.95rem; font-weight:600; color:#fff; margin-bottom:0.5rem; line-height:1.4; }
+.award-org { font-size:0.82rem; color:var(--muted); margin-bottom:0.3rem; }
+.award-date { font-family:var(--mono); font-size:0.72rem; color:var(--muted); margin-bottom:1rem; }
+.award-desc { font-size:0.85rem; color:var(--muted); line-height:1.6; margin-bottom:1rem; }
+.award-pills { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1rem; }
+.award-pill { font-family:var(--mono); font-size:0.65rem; padding:2px 7px; border:1px solid rgba(245,158,11,0.2); border-radius:3px; color:var(--amber); background:var(--amber-dim); }
+.award-photo { width:100%; border-radius:4px; overflow:hidden; border:1px solid var(--border); margin-top:0.5rem; }
+.award-photo img { width:100%; height:auto; display:block; filter:brightness(0.85) saturate(0.9); transition:filter 0.3s; }
+.award-card:hover .award-photo img { filter:brightness(1) saturate(1); }
+
+/* TRAINING */
+.training { border-top:1px solid var(--border); background:var(--bg); }
+.training-intro { font-size:0.95rem; color:var(--muted); line-height:1.8; margin-bottom:2.5rem; max-width:680px; }
+.training-intro strong { color:var(--text); }
+.training-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+.training-card { background:var(--bg2); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:all 0.2s; position:relative; }
+.training-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--cyan),transparent); opacity:0; transition:opacity 0.2s; z-index:1; }
+.training-card:hover { border-color:rgba(0,212,255,0.35); box-shadow:var(--glow-sm); transform:translateY(-3px); }
+.training-card:hover::before { opacity:1; }
+.training-img { width:100%; height:220px; object-fit:cover; display:block; filter:brightness(0.8) saturate(0.85); transition:filter 0.3s; }
+.training-card:hover .training-img { filter:brightness(1) saturate(1); }
+.training-body { padding:1.1rem 1.3rem 1.4rem; }
+.training-tag { font-family:var(--mono); font-size:0.65rem; color:var(--cyan); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.4rem; }
+.training-caption { font-family:var(--mono); font-size:0.78rem; color:var(--text); line-height:1.5; }
+
+/* CONTACT */
+.contact { border-top:1px solid var(--border); }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+.contact-intro { font-size:1rem; color:var(--muted); line-height:1.8; margin-bottom:2rem; }
+.contact-methods { display:flex; flex-direction:column; gap:0.75rem; }
+.contact-item { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; background:var(--bg2); border:1px solid var(--border); border-radius:6px; text-decoration:none; transition:all 0.2s; }
+.contact-item:hover { border-color:var(--cyan); background:var(--cyan-dim); box-shadow:var(--glow-sm); }
+.contact-item i { color:var(--cyan); font-size:1.1rem; width:20px; text-align:center; }
+.contact-item-text h4 { font-family:var(--mono); font-size:0.8rem; color:#fff; letter-spacing:0.05em; }
+.contact-item-text p { font-size:0.82rem; color:var(--muted); }
+.lang-block { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:2rem; margin-bottom:1.5rem; }
+.lang-title { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:1rem; }
+.lang-list { display:flex; flex-wrap:wrap; gap:8px; }
+.lang-item { font-family:var(--mono); font-size:0.75rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--text); }
+
+/* FOOTER */
+.footer { border-top:1px solid var(--border); padding:2rem 0; background:var(--bg); }
+.footer-inner { max-width:1100px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-family:var(--mono); font-size:0.72rem; color:var(--muted); }
+.footer-links { display:flex; gap:1rem; }
+.footer-links a { color:var(--muted); font-size:0.9rem; text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--cyan); }
+
+/* SCROLL REVEAL */
+.sr { opacity:0; transform:translateY(24px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.sr.in { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner { grid-template-columns:1fr; }
+  .hero-avatar { display:none; }
+  .about-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+}
+@media(max-width:640px){
+  .nav-links { display:none; }
+  .hero-name { font-size:2rem; }
+  .sec-title { font-size:1.5rem; }
+  .training-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:480px){
+  .training-grid { grid-template-columns:1fr; }
+}
+</style>
 </head>
+<meta property="og:title" content="Ahmed Marnissi | Embedded Software Engineer">
+<meta property="og:description" content="Embedded Linux • RTOS • C/C++ • ARM • STM32">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ahmed-marnissi.github.io">
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#home" class="logo">AM</a>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#awards" class="nav-link">Awards</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+<img src="assets/images/profile.jpg"
+     alt="Ahmed Marnissi - Embedded Software Engineer"
+     style="position:absolute; left:-9999px; width:1200px; height:630px;">
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">ahmed<span>@marnissi</span>:~$</a>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#awards">awards</a></li>
+      <li><a href="#training">training</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Embedded Software Engineer</div>
+      <h1 class="hero-name">Ahmed<br><span class="highlight">Marnissi</span></h1>
+      <div class="hero-title"><span id="typed"></span><span class="cursor"></span></div>
+      <p class="hero-desc">Embedded software development spanning RTOS, embedded Linux, and low-level protocol design — 3 years of hands-on engineering.</p>
+      <div class="hero-tags">
+        <span class="tag">C / C++</span>
+        <span class="tag">QNX RTOS</span>
+        <span class="tag">FreeRTOS</span>
+        <span class="tag">Embedded Linux</span>
+        <span class="tag">ARM Cortex-M/A</span>
+        <span class="tag">STM32</span>
+        <span class="tag">TCP/IP</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get In Touch</a>
+        <a href="assets/Ahmed-MarnissiResume.pdf" class="btn-secondary" download><i class="fas fa-download"></i> Download CV</a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:ahmed.marnissi202@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Ahmed-Marnissi" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-frame">
+        <img src="assets/images/profile.jpg" alt="Ahmed Marnissi">
+        <div class="avatar-corner tl"></div><div class="avatar-corner tr"></div>
+        <div class="avatar-corner bl"></div><div class="avatar-corner br"></div>
+      </div>
+      <div class="avatar-badge"><span class="dot"></span>Open to opportunities</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section about">
+  <div class="container">
+    <div class="sec-label">about</div>
+    <div class="sec-title">Who I Am</div>
+    <div class="sec-rule"></div>
+    <div class="about-grid sr">
+      <div class="about-text">
+        <p>Embedded Software Engineer with <strong>3 years of hands-on experience</strong> designing real-time and Linux-based embedded systems for safety-critical applications. Proficient in C/C++, QNX RTOS, FreeRTOS, and Embedded Linux, with deep expertise across <strong>ARM Cortex-M4/M7 and Cortex-A7</strong> architectures on STM32, STM32MP1, and i.MX platforms.</p>
+        <p>At <strong>ACTIA Engineering Services</strong>, I've engineered production systems spanning real-time QNX RTOS pipelines, Wi-Fi HaLow and LTE/TCP protocol stacks, GNSS middleware integration, custom I²C device drivers, AUTOSAR-aligned diagnostic modules with non-volatile DTC storage, and secure Embedded Linux images leveraging <strong>ARM TrustZone and OP-TEE</strong> on STM32MP1.</p>
+        <p>Beyond production work, I author technical articles on ARM architecture, FreeRTOS, and embedded Linux at <strong>Wadix Technologies</strong>, and mentor embedded systems students through IEEE INSAT RAS — conducting workshops on microcontroller programming and communication protocols.</p>
+        <p>I'm currently open to new opportunities in embedded systems engineering — particularly roles involving <strong>real-time systems, low-level protocol design, or embedded Linux development</strong>.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-row"><div class="stat-val">3+</div><div class="stat-key">Years Experience</div></div>
+        <div class="stat-row"><div class="stat-val">10+</div><div class="stat-key">Projects Completed</div></div>
+        <div class="stat-row"><div class="stat-val">3</div><div class="stat-key">Hackathon Awards</div></div>
+        <div class="stat-row"><div class="stat-val">5+</div><div class="stat-key">Technical Articles</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="sec-label">technical skills</div>
+    <div class="sec-title">Stack</div>
+    <div class="sec-rule"></div>
+    <div class="skills-grid sr">
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-code"></i> Programming</div><div class="skill-pills"><span class="pill">C</span><span class="pill">C++</span><span class="pill">Python</span></div></div>
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-microchip"></i> Operating Systems</div><div class="skill-pills"><span class="pill">QNX RTOS</span><span class="pill">FreeRTOS</span><span class="pill">Embedded Linux</span><span class="pill">OP-TEE</span></div></div>
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-cpu"></i> Architectures & Platforms</div><div class="skill-pills"><span class="pill">ARM Cortex-M4</span><span class="pill">Cortex-M7</span><span class="pill">Cortex-A7</span><span class="pill">STM32</span><span class="pill">STM32MP1</span><span class="pill">i.MX</span></div></div>
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-network-wired"></i> Protocols & Networking</div><div class="skill-pills"><span class="pill">TCP/IP</span><span class="pill">UDP</span><span class="pill">Ethernet</span><span class="pill">LTE</span><span class="pill">Wi-Fi HaLow</span><span class="pill">I²C</span><span class="pill">SPI</span><span class="pill">UART</span><span class="pill">I²S</span></div></div>
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-layer-group"></i> Middleware & IPC</div><div class="skill-pills"><span class="pill">LwIP</span><span class="pill">OpenAMP</span><span class="pill">POSIX IPC</span><span class="pill">Multithreading</span></div></div>
+      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-tools"></i> Tools & Testing</div><div class="skill-pills"><span class="pill">Git</span><span class="pill">Docker</span><span class="pill">Jenkins</span><span class="pill">LDRA</span><span class="pill">GoogleTest</span><span class="pill">J-Link</span><span class="pill">HackRF</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section experience">
+  <div class="container">
+    <div class="sec-label">professional experience</div>
+    <div class="sec-title">Experience</div>
+    <div class="sec-rule"></div>
+    <div class="timeline sr">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Aug 2023 — Present</div>
+        <div class="tl-role">Embedded Software Engineer</div>
+        <div class="tl-company">ACTIA Engineering Services · Tunis, Tunisia</div>
+        <div class="project-block"><div class="project-block-title">Crane Anti-Collision System</div><ul><li>Engineered TDM over UDP in C/C++ achieving <strong>&lt;50ms</strong> latency over 800m via Wi-Fi HaLow</li><li>Implemented LTE/TCP fallback for safety data exchange (~200ms latency)</li><li>Built embedded HTTP client on STM32 for GNSS RTK corrections via NTRIP caster</li></ul></div>
+        <div class="project-block"><div class="project-block-title">Gyroscope Integration — ICM-42605</div><ul><li>Replaced proprietary gyro with custom I²C driver, reducing hardware cost by <strong>80%+</strong></li><li>Designed real-time QNX RTOS processing stack with <strong>&lt;5ms</strong> response and ±1.5% precision</li><li>Implemented sensor fusion with POSIX shared memory for inter-module communication</li></ul></div>
+        <div class="project-block"><div class="project-block-title">FRAM Middleware on QNX</div><ul><li>Replaced SD card with FRAM over I²C, cutting access time by <strong>~70%</strong></li><li>Developed lightweight user-space middleware with robust read/write APIs</li></ul></div>
+        <div class="project-block"><div class="project-block-title">Diagnostic Event Manager (AUTOSAR DEM)</div><ul><li>Developed C++ DEM module aligned with AUTOSAR diagnostic specifications</li><li>Implemented DTC management and non-volatile fault memory across resets</li></ul></div>
+        <div class="tl-stack"><span>Stack:</span> C/C++, QNX RTOS, FreeRTOS, Linux, TCP/UDP, LTE, Wi-Fi HaLow, I²C, POSIX IPC, LDRA, GTest, Docker</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period">Feb 2023 — Jun 2023</div>
+        <div class="tl-role">Embedded Software Intern</div>
+        <div class="tl-company">ACTIA Engineering Services · Tunis, Tunisia</div>
+        <div class="project-block"><div class="project-block-title">STM32MP1 — Linux + OP-TEE + FreeRTOS</div><ul><li>Built custom Embedded Linux image using Buildroot (kernel, U-Boot, rootfs, toolchain)</li><li>Integrated ARM TrustZone and OP-TEE for secure/non-secure world co-execution</li><li>Implemented mailbox-based inter-core comms between Cortex-A7 (Linux) and Cortex-M4 (FreeRTOS)</li></ul></div>
+        <div class="tl-stack"><span>Stack:</span> C, ARM TrustZone, OP-TEE, Buildroot, STM32MP1, FreeRTOS, Linux, U-Boot, Device Tree</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="sec-label">featured projects</div>
+    <div class="sec-title">Projects</div>
+    <div class="sec-rule"></div>
+    <div class="projects-grid sr">
+      <div class="proj-card">
+        <img src="assets/images/audio_pdm.gif" alt="Audio Decimation" class="proj-img">
+        <div class="proj-card-body">
+          <div class="proj-num">// 01</div>
+          <div class="proj-title">Audio Decimation & Spectrum Analysis</div>
+          <p class="proj-desc">STM32 DSP pipeline converting PDM to PCM via multi-stage FIR decimation, with FFT analysis and PyQt spectrum visualization dashboard.</p>
+          <div class="proj-tags"><span class="proj-tag">C</span><span class="proj-tag">STM32</span><span class="proj-tag">FreeRTOS</span><span class="proj-tag">DSP</span><span class="proj-tag">I²S</span><span class="proj-tag">ARM-CMSIS</span></div>
+          <div class="proj-links"><a href="https://github.com/Ahmed-Marnissi/Audio_PDM" class="proj-link" target="_blank"><i class="fab fa-github"></i> Code</a><a href="assets/projects_docs/audio_pdm/index.html" class="proj-link" target="_blank"><i class="fas fa-book"></i> Docs</a></div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Hi, I'm <span class="gradient-text">Ahmed Marnissi</span>
-                </h1>
-                <h2 class="hero-subtitle">Embedded Software Engineer</h2>
-                <p class="hero-description">
-Embedded software development spanning RTOS, embedded Linux, low-level protocol design- 3 years of hands-on engineering                </p>
-                <div class="hero-skills">
-                    <span class="skill-tag">C / C++</span>
-                    <span class="skill-tag">QNX RTOS</span>
-                    <span class="skill-tag">FreeRTOS</span>
-                    <span class="skill-tag">Embedded Linux</span>
-                    <span class="skill-tag">ARM Cortex</span>
-                    <span class="skill-tag">STM32</span>
-                    <span class="skill-tag">TCP/IP</span>
-                    <span class="skill-tag">ETH, CAN ,I²C · SPI · UART</span>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="assets/Ahmed-MarnissiResume.pdf" class="btn btn-secondary" download>
-                        <i class="fas fa-download"></i> Download CV
-                    </a>
-                </div>
-                <div class="social-links">
-                    <a href="mailto:ahmed.marnissi202@gmail.com" aria-label="Email" target="_blank">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/ahmed-marnissi" aria-label="LinkedIn" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/Ahmed-Marnissi" aria-label="GitHub" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-placeholder">
-                    <img src="assets/images/profile.jpg" alt="Ahmed Marnissi" id="profile-img">
-                    <div class="image-overlay">Add your photo here</div>
-                </div>
-            </div>
+      </div>
+      <div class="proj-card">
+        <img src="assets/images/rtsp.gif" alt="Ethernet Audio Streaming" class="proj-img">
+        <div class="proj-card-body">
+          <div class="proj-num">// 02</div>
+          <div class="proj-title">Ethernet Audio Streaming Client</div>
+          <p class="proj-desc">RTSP/RTP client over TCP/UDP (LwIP) on STM32H750B with producer-consumer architecture using FreeRTOS for deterministic packet handling.</p>
+          <div class="proj-tags"><span class="proj-tag">C</span><span class="proj-tag">STM32</span><span class="proj-tag">FreeRTOS</span><span class="proj-tag">LwIP</span><span class="proj-tag">RTSP/RTP</span></div>
+          <div class="proj-links"><a href="https://github.com/Ahmed-Marnissi/RTSP_RTP_Streaming_Client_STM32" class="proj-link" target="_blank"><i class="fab fa-github"></i> Code</a></div>
         </div>
-        <div class="scroll-indicator">
-            <a href="#about">
-                <i class="fas fa-chevron-down"></i>
-            </a>
+      </div>
+      <div class="proj-card">
+        <img src="assets/images/AnimationShift.gif" alt="Phase Shift Measurement" class="proj-img">
+        <div class="proj-card-body">
+          <div class="proj-num">// 03</div>
+          <div class="proj-title">Phase Shift Measurement</div>
+          <p class="proj-desc">Cross-correlation based phase difference measurement on STM32 using CMSIS-DSP for real-time signal processing and precision angle detection.</p>
+          <div class="proj-tags"><span class="proj-tag">C</span><span class="proj-tag">STM32</span><span class="proj-tag">CMSIS-DSP</span><span class="proj-tag">Signal Processing</span></div>
+          <div class="proj-links"><a href="https://github.com/Ahmed-Marnissi/Phase_Shift_CrossCorrelation" class="proj-link" target="_blank"><i class="fab fa-github"></i> Code</a><a href="assets/projects_docs/phase_shift_crosscorrelation/index.html" class="proj-link" target="_blank"><i class="fas fa-book"></i> Docs</a></div>
         </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="about section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                    Embedded Software Engineer with 3 years of hands-on experience designing 
-                    real-time and Linux-based embedded systems for safety-critical applications. 
-                    Proficient in C/C++, QNX RTOS, FreeRTOS, and Embedded Linux, with  
-                    expertise across ARM Cortex-M4/M7 and Cortex-A7 architectures on STM32, 
-                    STM32MP1, and i.MX platforms.
-                   </p>
-                   <p>
-                    At ACTIA Engineering Services, I've engineered production systems spanning 
-                    real-time QNX RTOS pipelines, Wi-Fi HaLow and LTE/TCP protocol stacks, 
-                    GNSS middleware integration, custom I²C device drivers, AUTOSAR-aligned 
-                    diagnostic modules with non-volatile DTC storage, and secure Embedded Linux 
-                    images leveraging ARM TrustZone and OP-TEE on STM32MP1.
-                </p>
-                <p>
-                    Beyond production work, I author technical articles on ARM architecture, 
-                    FreeRTOS, and embedded Linux at Wadix Technologies, and mentor embedded 
-                    systems students through IEEE INSAT RAS — conducting workshops on 
-                    microcontroller programming, communication protocol.
-                </p>
-                <p>
-                    I'm currently open to new opportunities in embedded systems engineering — 
-                    particularly roles involving real-time systems,
-                    low-level protocol design, or embedded Linux development.
-                </p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">2+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Hackathon Awards</div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" class="section awards">
+  <div class="container">
+    <div class="sec-label">recognition</div>
+    <div class="sec-title">Awards</div>
+    <div class="sec-rule"></div>
+    <div class="awards-grid sr">
+      <div class="award-card">
+        <div class="award-rank"><i class="fas fa-trophy"></i> 1st Place</div>
+        <div class="award-title">TICAD8 National & African Automotive Hackathon</div>
+        <div class="award-org">ACTIA Engineering Services & StartupGateX</div>
+        <div class="award-date">September 2022</div>
+        <div class="award-desc">AI dashboard assistant with drowsiness detection using TinyML and OpenCV.</div>
+        <div class="award-pills"><span class="award-pill">TinyML</span><span class="award-pill">Computer Vision</span><span class="award-pill">Embedded AI</span></div>
+        <div class="award-photo"><img src="assets/images/ticad8-award.jpg" alt="TICAD8 Award"></div>
+      </div>
+      <div class="award-card">
+        <div class="award-rank"><i class="fas fa-medal"></i> 2nd Place</div>
+        <div class="award-title">Industrie 4.0 Hackathon</div>
+        <div class="award-org">Orange Digital Center</div>
+        <div class="award-date">July 2024</div>
+        <div class="award-desc">End-to-end defect detection system with Raspberry Pi & Edge Impulse.</div>
+        <div class="award-pills"><span class="award-pill">IoT</span><span class="award-pill">AI</span><span class="award-pill">Edge Computing</span></div>
+        <div class="award-photo"><img src="assets/images/industrie40-award.jpg" alt="Industrie 4.0 Award"></div>
+      </div>
+      <div class="award-card">
+        <div class="award-rank"><i class="fas fa-medal"></i> 2nd Place</div>
+        <div class="award-title">BOT Camp Hackathon</div>
+        <div class="award-org">Evident Industrial & IEEE INSAT RAS</div>
+        <div class="award-date">April 2024</div>
+        <div class="award-desc">Mobile probe mount for inspection drones using ROS & SolidWorks.</div>
+        <div class="award-pills"><span class="award-pill">Robotics</span><span class="award-pill">ROS</span><span class="award-pill">NDT</span></div>
+        <div class="award-photo"><img src="assets/images/botcamp-award.jpg" alt="BOT Camp Award"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section id="training" class="section training">
+  <div class="container">
+    <div class="sec-label">community</div>
+    <div class="sec-title">Training & Workshops</div>
+    <div class="sec-rule"></div>
+    <p class="training-intro">As a member and trainer at <strong>IEEE INSAT RAS Student Branch</strong>, I conduct hands-on workshops covering microcontroller programming, real-time operating systems, and communication protocols — helping engineering students build practical embedded systems skills.</p>
+    <div class="training-grid sr">
+      <div class="training-card">
+        <img src="assets/images/training1.jpg" alt="Workshop session" class="training-img">
+        <div class="training-body">
+          <div class="training-tag">// IEEE INSAT RAS</div>
+          <div class="training-caption">Live session — explaining real-time control concepts to students</div>
         </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills section">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Python</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-microchip"></i> Operating Systems</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">FreeRTOS</span>
-                        <span class="skill-tag">QNX</span>
-                        <span class="skill-tag">Linux</span>
-                        <span class="skill-tag">OP-TEE</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-cpu"></i> CPU Architectures</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">ARM Cortex-M4</span>
-                        <span class="skill-tag">Cortex-M7</span>
-                        <span class="skill-tag">Cortex-A7</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Protocols</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">I²C</span>
-                        <span class="skill-tag">UART</span>
-                        <span class="skill-tag">SPI</span>
-                        <span class="skill-tag">I²S</span>
-                        <span class="skill-tag">TCP/UDP</span>
-                        <span class="skill-tag">Ethernet</span>
-                        <span class="skill-tag">LTE</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-layer-group"></i> Middlewares</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LwIP</span>
-                        <span class="skill-tag">OpenAMP</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">STM32</span>
-                        <span class="skill-tag">STM32MP</span>
-                        <span class="skill-tag">i.MX</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Jenkins</span>
-                        <span class="skill-tag">J-Link</span>
-                        <span class="skill-tag">HackRF</span>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="training-card">
+        <img src="assets/images/training2.jpg" alt="Speed Control Workshop" class="training-img">
+        <div class="training-body">
+          <div class="training-tag">// Workshop</div>
+          <div class="training-caption">Speed Control Workshop — motor control & microcontroller programming</div>
         </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience section">
-        <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <!-- Current Position -->
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3>Embedded Software Engineer</h3>
-                            <span class="company">ACTIA Engineering Services</span>
-                            <span class="period">Aug 2023 – Present</span>
-                        </div>
-                        <div class="timeline-body">
-                            <div class="project-highlight">
-                                <h4><i class="fas fa-project-diagram"></i> Crane Anti-Collision System</h4>
-                                <ul>
-                                    <li>Engineered time-division multiplexing over UDP using Wi-Fi HaLow, achieving <strong>&lt;50ms</strong> transmission latency over <strong>800m</strong></li>
-                                    <li>Implemented TCP client-server fallback over 4G LTE for position/safety data exchange (~200ms latency)</li>
-                                    <li>Built embedded HTTP client on STM32 to connect GNSS rover to NTRIP caster via LTE, enabling real-time RTK corrections with <strong>±10cm</strong> precision</li>
-                                </ul>
-                                <div class="project-media-placeholder">
-                                    <img src="assets/images/AcSystem.gif" alt="Crane Anti-Collision System Demo" style="width: 100%; border-radius: 8px; margin-top: 1rem;">
-                                </div>
-                            </div>
-                            <div class="project-highlight">
-                                <h4><i class="fas fa-compass"></i> Gyroscope Integration</h4>
-                                <ul>
-                                    <li>Replaced proprietary gyro with custom ICM-42605 driver over I²C, reducing hardware cost by <strong>80%+</strong></li>
-                                    <li>Designed real-time processing stack on QNX RTOS for tilt angle & rotation speed with <strong>±1.5%</strong> precision and <strong>&lt;5ms</strong> response</li>
-                                    <li>Implemented sensor fusion using digital filtering and POSIX shared memory for inter-module communication</li>
-                                </ul>
-                            </div>
-                            <div class="project-highlight">
-                                <h4><i class="fas fa-memory"></i> FRAM Middleware on QNX</h4>
-                                <ul>
-                                    <li>Replaced SD card storage with FRAM (I²C), cutting access time by <strong>~70%</strong> and eliminating flash wear</li>
-                                    <li>Developed lightweight user-space middleware with robust read/write APIs, validation, and error handling</li>
-                                </ul>
-                            </div>
-                            <div class="project-highlight">
-                                <h4><i class="fas fa-exchange-alt"></i> Legacy Software Porting (32-bit → 64-bit Linux)</h4>
-                                <ul>
-                                    <li>Ported legacy embedded codebase addressing pointer sizes, memory alignment, and data types</li>
-                                    <li>Fixed architecture-related bugs; updated toolchains and libraries</li>
-                                    <li>Dockerized the build to ensure environment consistency across teams</li>
-                                </ul>
-                            </div>
-                            <div class="tech-stack">
-                                <strong>Stack:</strong> C/C++, Linux, FreeRTOS, TCP/UDP, QNX, LTE, Wi-Fi, UART, I²C, POSIX IPC, Multithreading, LDRA, GTest
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Internship -->
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3>Embedded Software Intern</h3>
-                            <span class="company">ACTIA Engineering Services</span>
-                            <span class="period">Feb 2023 – Jun 2023</span>
-                        </div>
-                        <div class="timeline-body">
-                            <ul>
-                                <li>Enabled <strong>ARM TrustZone</strong> and integrated <strong>OP-TEE</strong> on STM32MP1 for secure co-execution alongside Linux</li>
-                                <li>Developed mailbox-based communication between Cortex-A7 (Linux) and Cortex-M4 (RTOS) cores</li>
-                            </ul>
-                            <div class="tech-stack">
-                                <strong>Technologies:</strong> C, ARM TrustZone, Buildroot, OP-TEE, STM32MP1, FreeRTOS, Linux, U-Boot, Device Tree
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="training-card">
+        <img src="assets/images/training3.jpg" alt="Whiteboard session" class="training-img">
+        <div class="training-body">
+          <div class="training-tag">// Hands-on</div>
+          <div class="training-caption">Whiteboard walkthrough — embedded software architecture & state machines</div>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects section">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/audio_pdm.gif" alt="Audio Decimation Project">
-                    </div>
-                    <div class="project-content">
-                        <h3>Audio Decimation & Spectrum Analysis</h3>
-                        <p>STM32 Application for PDM to PCM decimation and FFT analysis on audio signals with PyQt dashboard for spectrum visualization.</p>
-                        <div class="project-tags">
-                            <span>C</span>
-                            <span>FreeRTOS</span>
-                            <span>FFT-DSP</span>
-                             <span>ARM-CMSIS</span>
-                            <span>I2S</span>
-                            <span>STM32</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Ahmed-Marnissi/Audio_PDM" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                            <a href="assets/projects_docs/audio_pdm/index.html" class="project-link" target="_blank">
-                                <i class="fas fa-book"></i> View Doc
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/ethernet-audio.jpg" alt="Ethernet Audio Streaming">
-                        <div class="image-overlay">RTSP-RTP</div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Ethernet Audio Streaming Client</h3>
-                        <p>RTSP/RTP implementation on TCP/UDP (LwIP) on STM32H750B with producer-consumer architecture using FreeRTOS.</p>
-                        <div class="project-tags">
-                            <span>C</span>
-                            <span>FreeRTOS</span>
-                            <span>LwIP</span>
-                            <span>RTSP/RTP</span>
-                            <span>STM32</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/AnimationShift.gif" alt="Phase Shift Measurement">
-                    </div>
-                    <div class="project-content">
-                        <h3>Phase Shift Measurement</h3>
-                        <p>Cross-correlation based phase difference measurement on STM32 using CMSIS-DSP for real-time signal processing.</p>
-                        <div class="project-tags">
-                            <span>C</span>
-                            <span>STM32</span>
-                            <span>CMSIS-DSP</span>
-                            <span>DSP</span>
-                            <span>Signal Processing</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Ahmed-Marnissi/Phase_Shift_CrossCorrelation" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                            <a href="assets/projects_docs/phase_shift_crosscorrelation/index.html" class="project-link" target="_blank">
-                                <i class="fas fa-book"></i>  View Doc
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="training-card">
+        <img src="assets/images/training4.jpg" alt="Group photo" class="training-img">
+        <div class="training-body">
+          <div class="training-tag">// IEEE INSAT RAS</div>
+          <div class="training-caption">Workshop closing — participants & organizing team at Orange Digital Center</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Awards Section -->
-    <section id="awards" class="awards section">
-        <div class="container">
-            <h2 class="section-title">Awards & Recognition</h2>
-            <div class="awards-grid">
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-trophy"></i>
-                        <span class="award-rank">1st</span>
-                    </div>
-                    <h3>TICAD8 National & African Automotive Hackathon</h3>
-                    <p class="award-organizer">ACTIA Engineering Services & StartupGateX</p>
-                    <p class="award-date">September 2022</p>
-                    <p class="award-description">
-                        AI dashboard assistant with drowsiness detection using TinyML and OpenCV
-                    </p>
-                    <div class="award-tags">
-                        <span>IoT</span>
-                        <span>TinyML</span>
-                        <span>Computer Vision</span>
-                        <span>Embedded AI</span>
-                    </div>
-                    <div class="award-media-placeholder">
-                        <img src="assets/images/ticad8-award.jpg" alt="TICAD8 hackathon award photo">
-                    </div>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                        <span class="award-rank">2nd</span>
-                    </div>
-                    <h3>Industrie 4.0 Hackathon</h3>
-                    <p class="award-organizer">Orange Digital Center</p>
-                    <p class="award-date">July 2024</p>
-                    <p class="award-description">
-                        End-to-end defect detection system with Raspberry Pi & Edge Impulse
-                    </p>
-                    <div class="award-tags">
-                        <span>IoT</span>
-                        <span>AI</span>
-                        <span>Edge Computing</span>
-                    </div>
-                    <div class="award-media-placeholder">
-                        <img src="assets/images/industrie40-award.jpg" alt="Industrie 4.0 hackathon award photo">
-                    </div>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                        <span class="award-rank">2nd</span>
-                    </div>
-                    <h3>BOT Camp Hackathon</h3>
-                    <p class="award-organizer">Evident Industrial & IEEE INSAT RAS</p>
-                    <p class="award-date">April 2024</p>
-                    <p class="award-description">
-                        Mobile probe mount for inspection drones using ROS & SolidWorks
-                    </p>
-                    <div class="award-tags">
-                        <span>Robotics</span>
-                        <span>ROS</span>
-                        <span>NDT</span>
-                    </div>
-                    <div class="award-media-placeholder">
-                        <img src="assets/images/botcamp-award.jpg" alt="BOT Camp hackathon award photo">
-                    </div>
-                </div>
-            </div>
+<!-- CONTACT -->
+<section id="contact" class="section contact">
+  <div class="container">
+    <div class="sec-label">contact</div>
+    <div class="sec-title">Get In Touch</div>
+    <div class="sec-rule"></div>
+    <div class="contact-grid sr">
+      <div>
+        <p class="contact-intro">I'm open to new opportunities in embedded systems engineering — real-time systems, safety-critical software, or embedded Linux roles. Feel free to reach out.</p>
+        <div class="contact-methods">
+          <a href="mailto:ahmed.marnissi202@gmail.com" class="contact-item"><i class="fas fa-envelope"></i><div class="contact-item-text"><h4>Email</h4><p>ahmed.marnissi202@gmail.com</p></div></a>
+          <a href="https://www.linkedin.com/in/ahmed-marnissi" class="contact-item" target="_blank"><i class="fab fa-linkedin"></i><div class="contact-item-text"><h4>LinkedIn</h4><p>linkedin.com/in/ahmed-marnissi</p></div></a>
+          <a href="https://github.com/Ahmed-Marnissi" class="contact-item" target="_blank"><i class="fab fa-github"></i><div class="contact-item-text"><h4>GitHub</h4><p>github.com/Ahmed-Marnissi</p></div></a>
         </div>
-    </section>
-
-    <!-- Education & Organizations -->
-    <section id="education" class="education section">
-        <div class="container">
-            <div class="education-grid">
-                <div class="education-card">
-                    <h2 class="section-title">Education</h2>
-                    <div class="edu-content">
-                        <div class="edu-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="edu-details">
-                            <h3>Engineering Degree</h3>
-                            <h4>Industrial Computing & Automation</h4>
-                            <p class="institution">National Institute of Applied Sciences and Technologies (INSAT)</p>
-                            <p class="location">Tunis, Tunisia</p>
-                            <p class="period">2018 – 2023</p>
-                            <a href="https://insat.rnu.tn/" target="_blank" class="edu-link">
-                                <i class="fas fa-external-link-alt"></i> Visit INSAT
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="education-card">
-                    <h2 class="section-title">Organizations</h2>
-                    <div class="org-content">
-                        <div class="org-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="org-details">
-                            <h3>IEEE INSAT RAS Student Branch</h3>
-                            <h4>Member & Embedded Systems Trainer</h4>
-                            <p class="period">2020 – Present</p>
-                            <ul>
-                                <li>Participated in Eurobot International Robotics Competition (embedded systems)</li>
-                                <li>Led workshops on microcontroller programming & communication protocols</li>
-                            </ul>
-                            <a href="https://www.linkedin.com/company/ieee-insat-ras/posts/?feedView=all" target="_blank" class="org-link">
-                                <i class="fab fa-linkedin"></i> View Updates
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="publications">
-                <h2 class="section-title">Publications</h2>
-                <div class="publication-card">
-                    <div class="pub-icon">
-                        <i class="fab fa-medium"></i>
-                    </div>
-                    <div class="pub-content">
-                        <h3>Contributor — Embedded Systems Articles</h3>
-                        <p class="pub-org">Wadix Technologies</p>
-                        <p>Writing on ARM architecture, Linux kernel concepts, embedded software design, and CS fundamentals.</p>
-                        <a href="https://medium.com/@wadixtech" target="_blank" class="pub-link">
-                            <i class="fab fa-medium"></i> Read on Medium
-                        </a>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div>
+        <div class="lang-block">
+          <div class="lang-title">// languages</div>
+          <div class="lang-list"><span class="lang-item">English</span><span class="lang-item">French</span><span class="lang-item">Arabic</span></div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p class="contact-intro">
-                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                    </p>
-                    <div class="contact-methods">
-                        <a href="mailto:ahmed.marnissi202@gmail.com" class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>ahmed.marnissi202@gmail.com</p>
-                            </div>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank" class="contact-method">
-                            <i class="fab fa-linkedin"></i>
-                            <div>
-                                <h4>LinkedIn</h4>
-                                <p>Connect with me</p>
-                            </div>
-                        </a>
-                        <a href="https://github.com/Ahmed-Marnissi" target="_blank" class="contact-method">
-                            <i class="fab fa-github"></i>
-                            <div>
-                                <h4>GitHub</h4>
-                                <p>Check out my code</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="languages">
-                        <h4>Languages</h4>
-                        <div class="language-tags">
-                            <span><i class="fas fa-language"></i> English</span>
-                            <span><i class="fas fa-language"></i> French</span>
-                            <span><i class="fas fa-language"></i> Arabic</span>
-                            <span><i class="fas fa-language"></i> German</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="lang-block">
+          <div class="lang-title">// publications</div>
+          <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">Contributing technical articles on ARM architecture, FreeRTOS, and embedded Linux at <strong style="color:var(--text)">Wadix Technologies</strong>.</p>
+          <a href="https://medium.com/@wadixtech" target="_blank" class="proj-link" style="font-size:0.8rem;"><i class="fab fa-medium"></i> Read on Medium</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Ahmed Marnissi. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="mailto:ahmed.marnissi202@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Ahmed-Marnissi" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </footer>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-copy">© 2026 Ahmed Marnissi — built with precision</div>
+    <div class="footer-links">
+      <a href="mailto:ahmed.marnissi202@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Ahmed-Marnissi" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+</footer>
 
-    <script src="script.js"></script>
+<script>
+// Typed effect
+const phrases = ['C/C++ · QNX · FreeRTOS','Real-Time Systems Engineer','Embedded Linux Developer','Low-Level Protocol Designer'];
+let pi=0,ci=0,deleting=false;
+const el=document.getElementById('typed');
+function type(){
+  const phrase=phrases[pi];
+  if(!deleting){ el.textContent=phrase.slice(0,++ci); if(ci===phrase.length){deleting=true;setTimeout(type,2000);return;} }
+  else { el.textContent=phrase.slice(0,--ci); if(ci===0){deleting=false;pi=(pi+1)%phrases.length;} }
+  setTimeout(type,deleting?40:70);
+}
+type();
+
+// Scroll reveal — simple, no IntersectionObserver issues
+function checkVisible(){
+  document.querySelectorAll('.sr').forEach(function(el){
+    if(el.getBoundingClientRect().top < window.innerHeight - 50){
+      el.classList.add('in');
+    }
+  });
+}
+checkVisible();
+window.addEventListener('scroll', checkVisible, {passive:true});
+window.addEventListener('load', checkVisible);
+
+// Active nav highlight
+window.addEventListener('scroll',function(){
+  var current='';
+  document.querySelectorAll('section[id]').forEach(function(s){
+    if(window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.style.color = a.getAttribute('href')==='#'+current ? 'var(--cyan)' : '';
+  });
+});
+</script>
 </body>
 </html>
