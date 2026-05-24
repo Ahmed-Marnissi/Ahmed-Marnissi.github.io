@@ -89,25 +89,120 @@ body::before {
 
 /* ABOUT */
 .about { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.about-grid { display:grid; grid-template-columns:1fr 320px; gap:4rem; align-items:start; }
-.about-text p { color:var(--muted); font-size:1rem; line-height:1.85; margin-bottom:1.4rem; }
-.about-text p strong { color:var(--text); }
-.about-stats { display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:6px; overflow:hidden; }
-.stat-row { background:var(--bg3); padding:1.4rem 1.6rem; border-bottom:1px solid var(--border); transition:background 0.2s; }
-.stat-row:last-child { border-bottom:none; }
-.stat-row:hover { background:rgba(0,212,255,0.04); }
-.stat-val { font-family:var(--mono); font-size:2.2rem; font-weight:700; color:var(--cyan); line-height:1; margin-bottom:0.3rem; }
-.stat-key { font-family:var(--mono); font-size:0.72rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1.4rem;
+}
+
+.about-text p strong { color: var(--text); }
+
+.about-currently {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--cyan);
+  border-radius: 0 4px 4px 0;
+  padding: 0.75rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.about-currently-label {
+  color: var(--cyan);
+  margin-right: 0.75rem;
+}
+
+.about-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.asr-item { text-align: center; }
+
+.asr-val {
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--cyan);
+  line-height: 1;
+}
+
+.asr-key {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.asr-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+}
+
+.about-photo {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--glow-sm);
+}
+
+.about-photo img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: brightness(0.9) saturate(0.9);
+  transition: filter 0.3s;
+}
+
+.about-photo:hover img {
+  filter: brightness(1) saturate(1);
+}
+
+.about-photo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.6rem 1rem;
+  background: rgba(8,12,20,0.75);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--cyan);
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(4px);
+}
+
+@media(max-width:900px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { display: none; }
+}
 
 /* SKILLS */
 .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
-.skill-block { background:var(--bg2); padding:1.6rem; transition:background 0.2s; }
-.skill-block:hover { background:rgba(0,212,255,0.03); }
-.skill-block-title { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
-.skill-block-title i { opacity:0.7; }
-.skill-pills { display:flex; flex-wrap:wrap; gap:6px; }
-.pill { font-family:var(--mono); font-size:0.72rem; padding:3px 9px; border:1px solid rgba(0,212,255,0.2); border-radius:3px; color:#94a3b8; background:rgba(0,212,255,0.04); transition:all 0.15s; }
-.pill:hover { color:var(--cyan); border-color:var(--cyan); background:var(--cyan-dim); }
+.skill-block { background:var(--bg2); padding:1.8rem; transition:background 0.2s; border-bottom:1px solid var(--border); }
+.skill-block:hover { background:rgba(0,212,255,0.04); }
+.skill-block-title { font-family:var(--mono); font-size:0.72rem; color:var(--cyan); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border); }
+.skill-pills { display:flex; flex-wrap:wrap; gap:8px; padding-top:0.2rem; }
+.pill { font-family:var(--mono); font-size:0.72rem; padding:5px 12px; border:1px solid rgba(0,212,255,0.15); border-radius:4px; color:#64748b; background:rgba(0,212,255,0.03); transition:all 0.2s; cursor:default; }
+.pill:hover { color:var(--cyan); border-color:rgba(0,212,255,0.5); background:rgba(0,212,255,0.08); transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,212,255,0.1); }
+.pill-main { color:#94a3b8; border-color:rgba(0,212,255,0.25); background:rgba(0,212,255,0.06); }
+.pill-main:hover { color:#fff; border-color:var(--cyan); background:rgba(0,212,255,0.12); box-shadow:0 2px 10px rgba(0,212,255,0.15); }
 
 /* EXPERIENCE */
 .experience { background:var(--bg2); border-top:1px solid var(--border); }
@@ -222,6 +317,250 @@ body::before {
 @media(max-width:480px){
   .training-grid { grid-template-columns:1fr; }
 }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero-bg-slides { position: absolute; inset: 0; z-index: 0; }
+.hero-bg-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.hero-bg-slide.active { opacity: 1; }
+.hero-bg-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(8,12,20,0.98) 25%,
+    rgba(8,12,20,0.88) 50%,
+    rgba(8,12,20,0.75) 75%,
+    rgba(8,12,20,0.92) 100%
+  );
+}
+.hero-overlay-bottom {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to top, rgba(8,12,20,0.75) 0%, transparent 35%);
+}
+
+.hero-content {
+  position: relative; z-index: 10;
+  width: 100%; max-width: 1100px;
+  margin: 0 auto; padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: calc(100vh - 80px);
+  padding-bottom: 80px;
+}
+
+.hero-left {
+  max-width: 560px;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-right {
+  position: relative;
+  flex-shrink: 0;
+  margin-bottom: 1.5rem;
+}
+.hero-right .avatar-frame {
+  width: 280px; height: 320px;
+  min-height: 280px;
+  background: var(--bg2);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--glow);
+  position: relative;
+}
+.hero-right .avatar-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-right .avatar-frame::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), transparent 60%);
+  z-index: 1; pointer-events: none;
+}
+.hero-right .avatar-badge {
+  position: absolute;
+  bottom: -18px; left: -18px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--cyan);
+  white-space: nowrap;
+  box-shadow: var(--glow-sm);
+  z-index: 2;
+}
+@media(max-width:900px){
+  .hero-right { display: none; }
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem; color: var(--cyan);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  display: flex; align-items: center; gap: 0.7rem;
+}
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--cyan); }
+
+.hero-name {
+  font-family: var(--mono);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700; color: #fff;
+  line-height: 1.08; letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.hero-name .highlight { color: var(--cyan); text-shadow: var(--glow); }
+
+.hero-tagline {
+  font-family: var(--sans);
+  font-size: 1rem; color: #94a3b8;
+  line-height: 1.75; max-width: 460px;
+  margin-bottom: 1.8rem;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap;
+  gap: 7px; margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex; gap: 0.9rem;
+  align-items: center; margin-bottom: 2.2rem;
+}
+
+.hero-bottom-strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: rgba(8,12,20,0.6);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  max-width: 100%;
+}
+
+.hero-strip-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hbs-val {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-right: 6px;
+}
+
+.hbs-key {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hbs-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+.hero-strip-socials {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.hero-strip-socials a {
+  width: 34px; height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 0.85rem;
+  text-decoration: none; transition: all 0.2s;
+}
+
+.hero-strip-socials a:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+.hero-slide-label {
+  position: absolute; bottom: 2rem; left: 2rem;
+  z-index: 20;
+  font-family: var(--mono); font-size: 0.65rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  transition: opacity 0.4s;
+}
+
+.hero-indicators {
+  position: absolute; bottom: 2rem; right: 2rem;
+  z-index: 20; display: flex; gap: 6px; align-items: center;
+}
+.hero-ind {
+  width: 22px; height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px; cursor: pointer;
+  transition: all 0.35s;
+}
+.hero-ind.active { width: 36px; background: var(--cyan); }
+
+.hero-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.8rem;
+}
+
+.hsk-item {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 3px;
+  color: #94a3b8;
+  background: rgba(8,12,20,0.5);
+  backdrop-filter: blur(4px);
+}
+
+@media(max-width:640px){
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat-val { font-size: 1.4rem; }
+  .hero-slide-label { display: none; }
+}
 </style>
 </head>
 <meta property="og:title" content="Ahmed Marnissi | Embedded Software Engineer">
@@ -251,40 +590,83 @@ body::before {
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
+
+  <!-- Background slideshow -->
+  <div class="hero-bg-slides" id="heroBgSlides">
+    <div class="hero-bg-slide active">
+      <img src="assets/images/training1.jpg" alt="IEEE Workshop">
+    </div>
+    <div class="hero-bg-slide">
+      <img src="assets/images/ticad8-award.jpg" alt="TICAD8 1st Place">
+    </div>
+    <div class="hero-bg-slide">
+      <img src="assets/images/botcamp-award.jpg" alt="BOT Camp 2nd Place">
+    </div>
+    <div class="hero-bg-slide">
+      <img src="assets/images/industrie40-award.jpg" alt="Industrie 4.0 2nd Place">
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <!-- Main content -->
+  <div class="hero-content">
+    <div class="hero-left">
       <div class="hero-eyebrow">Embedded Software Engineer</div>
-      <h1 class="hero-name">Ahmed<br><span class="highlight">Marnissi</span></h1>
-      <div class="hero-title"><span id="typed"></span><span class="cursor"></span></div>
-      <p class="hero-desc">Embedded software development spanning RTOS, embedded Linux, and low-level protocol design - 3 years of hands-on engineering.</p>
-      <div class="hero-tags">
-        <span class="tag">C / C++</span>
-        <span class="tag">QNX RTOS</span>
-        <span class="tag">FreeRTOS</span>
-        <span class="tag">Embedded Linux</span>
-        <span class="tag">ARM Cortex-M/A</span>
-        <span class="tag">STM32</span>
-        <span class="tag">TCP/IP</span>
-      </div>
+      <h1 class="hero-name">
+        Ahmed<br><span class="highlight">Marnissi</span>
+      </h1>
+      <p class="hero-tagline">
+        Building safety-critical embedded systems at ACTIA Engineering Services.
+      </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Get In Touch</a>
       </div>
-      <div class="hero-socials">
-        <a href="mailto:ahmed.marnissi202@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/Ahmed-Marnissi" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <div class="hero-skills">
+        <span class="hsk-item">C / C++</span>
+        <span class="hsk-item">QNX RTOS</span>
+        <span class="hsk-item">FreeRTOS</span>
+        <span class="hsk-item">Embedded Linux</span>
+        <span class="hsk-item">ARM Cortex-M/A</span>
+        <span class="hsk-item">STM32</span>
+        <span class="hsk-item">TCP/IP</span>
+        <span class="hsk-item">Wi-Fi HaLow</span>
       </div>
-    </div>
-    <div class="hero-avatar">
-      <div class="avatar-frame">
-        <img src="assets/images/profile.jpg" alt="Ahmed Marnissi">
-        <div class="avatar-corner tl"></div><div class="avatar-corner tr"></div>
-        <div class="avatar-corner bl"></div><div class="avatar-corner br"></div>
-      </div>
-      <div class="avatar-badge"><span class="dot"></span>Open to opportunities</div>
     </div>
   </div>
+
+  <!-- Slide label bottom-left -->
+  <div class="hero-slide-label" id="heroSlideLabel">
+    TICAD8 Hackathon · 1st Place
+  </div>
+
+  <!-- Dot indicators bottom-right -->
+  <div class="hero-indicators" id="heroIndicators">
+    <div class="hero-ind active" onclick="heroGoTo(0)"></div>
+    <div class="hero-ind" onclick="heroGoTo(1)"></div>
+    <div class="hero-ind" onclick="heroGoTo(2)"></div>
+    <div class="hero-ind" onclick="heroGoTo(3)"></div>
+  </div>
+
+  <!-- Bottom strip: stats + socials -->
+  <div class="hero-bottom-strip">
+    <div class="hero-strip-stats">
+      <div><span class="hbs-val">3+</span><span class="hbs-key">Years</span></div>
+      <div class="hbs-divider"></div>
+      <div><span class="hbs-val">10+</span><span class="hbs-key">Projects</span></div>
+      <div class="hbs-divider"></div>
+      <div><span class="hbs-val">3</span><span class="hbs-key">Awards</span></div>
+    </div>
+    <div class="hero-strip-socials">
+      <a href="mailto:ahmed.marnissi202@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Ahmed-Marnissi" target="_blank"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+
 </section>
+<!-- END HERO -->
 
 <!-- ABOUT -->
 <section id="about" class="section about">
@@ -293,17 +675,44 @@ body::before {
     <div class="sec-title">Who I Am</div>
     <div class="sec-rule"></div>
     <div class="about-grid sr">
+
       <div class="about-text">
-        <p>Embedded Software Engineer with <strong>3 years of hands-on experience</strong> designing real-time and Linux-based embedded systems for safety-critical applications. Proficient in C/C++, QNX RTOS, FreeRTOS, and Embedded Linux, with deep expertise across <strong>ARM Cortex-M4/M7 and Cortex-A7</strong> architectures on STM32, STM32MP1, and i.MX platforms.</p>
-        <p>At <strong>ACTIA Engineering Services</strong>, I've engineered production systems spanning real-time QNX RTOS pipelines, Wi-Fi HaLow and LTE/TCP protocol stacks, GNSS middleware integration, custom I²C device drivers, AUTOSAR-aligned diagnostic modules with non-volatile DTC storage, and secure Embedded Linux images leveraging <strong>ARM TrustZone and OP-TEE</strong> on STM32MP1.</p>
-        <p>Beyond production work, I mentor embedded systems students through IEEE INSAT RAS</strong> - conducting workshops on microcontroller programming and communication protocols.</p>
-        <p>I'm currently open to new opportunities in embedded systems engineering - particularly roles involving <strong>real-time systems, low-level protocol design, or embedded Linux development</strong>.</p>
+        <p>Embedded Software Engineer with <strong>3 years of experience</strong> building real-time and Linux-based systems for safety-critical applications. At <strong>ACTIA Engineering Services</strong>, I work across QNX RTOS pipelines, Wi-Fi HaLow and LTE/TCP stacks, custom I²C drivers, AUTOSAR diagnostics, and secure Embedded Linux on <strong>ARM Cortex-M4/M7/A7</strong> — STM32, STM32MP1, and i.MX platforms.</p>
+        <p>Outside work, I mentor engineering students at <strong>IEEE INSAT RAS</strong>, running hands-on workshops on microcontrollers, RTOS, and communication protocols.</p>
+
+        <div class="about-currently">
+          <span class="about-currently-label">// currently</span>
+          Open to embedded systems roles · Real-time · Linux · Protocol design
+        </div>
+
+        <div class="about-stats-row">
+          <div class="asr-item">
+            <div class="asr-val">3+</div>
+            <div class="asr-key">Years Exp.</div>
+          </div>
+          <div class="asr-divider"></div>
+          <div class="asr-item">
+            <div class="asr-val">10+</div>
+            <div class="asr-key">Projects</div>
+          </div>
+          <div class="asr-divider"></div>
+          <div class="asr-item">
+            <div class="asr-val">3</div>
+            <div class="asr-key">Awards</div>
+          </div>
+          <div class="asr-divider"></div>
+          <div class="asr-item">
+            <div class="asr-val">2</div>
+            <div class="asr-key">Languages</div>
+          </div>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-row"><div class="stat-val">2+</div><div class="stat-key">Years Experience</div></div>
-        <div class="stat-row"><div class="stat-val">10+</div><div class="stat-key">Projects Completed</div></div>
-        <div class="stat-row"><div class="stat-val">3</div><div class="stat-key">Hackathon Awards</div></div>
+
+      <div class="about-photo">
+        <img src="assets/images/profile.jpg" alt="Ahmed presenting at IEEE workshop">
+        <div class="about-photo-caption">// IEEE INSAT RAS · Workshop</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -315,12 +724,68 @@ body::before {
     <div class="sec-title">Stack</div>
     <div class="sec-rule"></div>
     <div class="skills-grid sr">
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-code"></i> Programming</div><div class="skill-pills"><span class="pill">C</span><span class="pill">C++</span><span class="pill">Python</span></div></div>
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-microchip"></i> Operating Systems</div><div class="skill-pills"><span class="pill">QNX RTOS</span><span class="pill">FreeRTOS</span><span class="pill">Embedded Linux</span><span class="pill">OP-TEE</span></div></div>
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-cpu"></i> Architectures & Platforms</div><div class="skill-pills"><span class="pill">ARM Cortex-M4</span><span class="pill">Cortex-M7</span><span class="pill">Cortex-A7</span><span class="pill">STM32</span><span class="pill">STM32MP1</span><span class="pill">i.MX</span></div></div>
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-network-wired"></i> Protocols & Networking</div><div class="skill-pills"><span class="pill">TCP/IP</span><span class="pill">UDP</span><span class="pill">Ethernet</span><span class="pill">LTE</span><span class="pill">Wi-Fi HaLow</span><span class="pill">I²C</span><span class="pill">SPI</span><span class="pill">UART</span><span class="pill">I²S</span></div></div>
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-layer-group"></i> Middleware & IPC</div><div class="skill-pills"><span class="pill">LwIP</span><span class="pill">OpenAMP</span><span class="pill">POSIX IPC</span><span class="pill">Multithreading</span></div></div>
-      <div class="skill-block"><div class="skill-block-title"><i class="fas fa-tools"></i> Tools & Testing</div><div class="skill-pills"><span class="pill">Git</span><span class="pill">Docker</span><span class="pill">Jenkins</span><span class="pill">LDRA</span><span class="pill">GoogleTest</span><span class="pill">J-Link</span><span class="pill">HackRF</span></div></div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-code"></i> Languages</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">C</span>
+          <span class="pill pill-main">C++</span>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-microchip"></i> Operating Systems</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">QNX RTOS</span>
+          <span class="pill pill-main">FreeRTOS</span>
+          <span class="pill pill-main">Embedded Linux</span>
+          <span class="pill">OP-TEE</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-cpu"></i> Platforms</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">STM32</span>
+          <span class="pill pill-main">STM32MP1</span>
+          <span class="pill">ARM Cortex-M4</span>
+          <span class="pill">Cortex-M7</span>
+          <span class="pill">Cortex-A7</span>
+          <span class="pill">i.MX</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-network-wired"></i> Protocols</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">TCP/IP</span>
+          <span class="pill pill-main">Wi-Fi HaLow</span>
+          <span class="pill pill-main">LTE</span>
+          <span class="pill">UDP</span>
+          <span class="pill">I²C</span>
+          <span class="pill">SPI</span>
+          <span class="pill">UART</span>
+          <span class="pill">I²S</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-layer-group"></i> Middleware & IPC</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">LwIP</span>
+          <span class="pill">OpenAMP</span>
+          <span class="pill">POSIX IPC</span>
+          <span class="pill">Multithreading</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-title"><i class="fas fa-tools"></i> Tools & Testing</div>
+        <div class="skill-pills">
+          <span class="pill pill-main">Git</span>
+          <span class="pill pill-main">Docker</span>
+          <span class="pill">Jenkins</span>
+          <span class="pill">LDRA</span>
+          <span class="pill">GoogleTest</span>
+          <span class="pill">J-Link</span>
+          <span class="pill">HackRF</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -500,7 +965,7 @@ body::before {
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-copy">© 2026 Ahmed Marnissi - built with precision</div>
+    <div class="footer-copy">© 2026 Ahmed Marnissi </div>
     <div class="footer-links">
       <a href="mailto:ahmed.marnissi202@gmail.com"><i class="fas fa-envelope"></i></a>
       <a href="https://www.linkedin.com/in/ahmed-marnissi" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -510,18 +975,6 @@ body::before {
 </footer>
 
 <script>
-// Typed effect
-const phrases = ['C/C++ · QNX · FreeRTOS','Real-Time Systems Engineer','Embedded Linux Developer','Low-Level Protocol Designer'];
-let pi=0,ci=0,deleting=false;
-const el=document.getElementById('typed');
-function type(){
-  const phrase=phrases[pi];
-  if(!deleting){ el.textContent=phrase.slice(0,++ci); if(ci===phrase.length){deleting=true;setTimeout(type,2000);return;} }
-  else { el.textContent=phrase.slice(0,--ci); if(ci===0){deleting=false;pi=(pi+1)%phrases.length;} }
-  setTimeout(type,deleting?40:70);
-}
-type();
-
 // Scroll reveal - simple, no IntersectionObserver issues
 function checkVisible(){
   document.querySelectorAll('.sr').forEach(function(el){
@@ -544,6 +997,52 @@ window.addEventListener('scroll',function(){
     a.style.color = a.getAttribute('href')==='#'+current ? 'var(--cyan)' : '';
   });
 });
+</script>
+
+<script>
+(function() {
+  var heroLabels = [
+    'IEEE INSAT RAS · Workshop',
+    'TICAD8 Hackathon · 1st Place',
+    'BOT Camp · 2nd Place',
+    'Industrie 4.0 · 2nd Place'
+  ];
+  var heroCur = 0;
+  var heroSlides = document.querySelectorAll('.hero-bg-slide');
+  var heroInds   = document.querySelectorAll('.hero-ind');
+  var heroLabel  = document.getElementById('heroSlideLabel');
+
+  window.heroGoTo = function(n) {
+    heroSlides[heroCur].classList.remove('active');
+    heroInds[heroCur].classList.remove('active');
+    heroCur = n;
+    heroSlides[heroCur].classList.add('active');
+    heroInds[heroCur].classList.add('active');
+    heroLabel.textContent = heroLabels[heroCur];
+  };
+
+  setInterval(function() {
+    heroGoTo((heroCur + 1) % heroSlides.length);
+  }, 4000);
+
+  /* Animated stat counters — runs once on load */
+  function animateCount(id, target, suffix, duration) {
+    var el = document.getElementById(id);
+    var start = 0;
+    var step = Math.ceil(duration / target);
+    var timer = setInterval(function() {
+      start++;
+      el.textContent = start + suffix;
+      if (start >= target) clearInterval(timer);
+    }, step);
+  }
+
+  window.addEventListener('load', function() {
+    animateCount('statYears',   3,  '+', 600);
+    animateCount('statProjects', 10, '+', 400);
+    animateCount('statAwards',  3,  '',  600);
+  });
+})();
 </script>
 </body>
 </html>
