@@ -1,0 +1,30 @@
+Usage
+=====
+
+Initialization
+--------------
+
+Initialize the handle with the signal frequency and sampling frequency:
+
+.. code-block:: c
+
+   PhaseShift_Handle_t phaseHandle;
+   phaseShift_Init(&phaseHandle, SIGNAL_FREQUENCY_HZ, SAMPLE_FREQUENCY_HZ);
+
+Real-time processing
+--------------------
+
+Feed new samples and read the latest phase estimate:
+
+.. code-block:: c
+
+   float32_t phase = phaseShift_ProcessSample(&phaseHandle,
+                                              currentSignal,
+                                              voltageSignal);
+
+Notes
+-----
+
+- The algorithm computes a new phase value each time a full buffer of
+  `SIGNAL_LENGTH` samples has been collected.
+- The returned value is in degrees.

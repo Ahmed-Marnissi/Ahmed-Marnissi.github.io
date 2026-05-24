@@ -1,0 +1,52 @@
+API Reference
+=============
+
+This section documents the public interface defined in
+`Source/AppPhaseShift/Inc/phase_shift.h`.
+
+Constants
+---------
+
+.. code-block:: c
+
+   #define SIGNAL_LENGTH 1024U
+
+Types
+-----
+
+.. code-block:: c
+
+   typedef struct
+   {
+       float32_t freq;
+       float32_t input1[SIGNAL_LENGTH];
+       float32_t input2[SIGNAL_LENGTH];
+       float32_t result[SIGNAL_LENGTH * 2 - 1];
+       float32_t samplingFreq;
+       uint32_t currentIndex;
+       uint32_t resultLength;
+       int32_t maxIndex;
+       float32_t timeDelay;
+       float32_t phase;
+       uint8_t processCrossCorrelation;
+   } PhaseShift_Handle_t;
+
+Functions
+---------
+
+.. code-block:: c
+
+   void phaseShift_Init(PhaseShift_Handle_t *handle,
+                        float32_t freq,
+                        float32_t samplingFreq);
+
+Initializes the handle, clears buffers, and sets the frequency parameters.
+
+.. code-block:: c
+
+   float32_t phaseShift_ProcessSample(PhaseShift_Handle_t *handle,
+                                      float32_t in1_sample,
+                                      float32_t in2_sample);
+
+Stores new samples, triggers cross-correlation when the buffer is full, and
+returns the most recent phase in degrees.

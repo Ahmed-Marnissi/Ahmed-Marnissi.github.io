@@ -1,0 +1,24 @@
+Getting Started
+===============
+
+Requirements
+------------
+
+- STM32CubeIDE
+- CMSIS-DSP library
+- ST-LINK debugger
+- STM32CubeMonitor (optional, for visualization)
+
+Installation
+------------
+
+1. Clone the repository.
+2. Open the project in STM32CubeIDE.
+3. Build and flash the firmware to your STM32 device.
+
+Project Layout
+--------------
+
+- `Source/AppPhaseShift` contains the phase shift library.
+- `Source/Core` holds the STM32 startup and application glue code.
+- `docs` contains this Sphinx documentation.

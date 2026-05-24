@@ -1,0 +1,20 @@
+Architecture
+============
+
+The library buffers two input signals, computes cross-correlation once a full
+window is collected, and derives phase from the peak delay.
+
+Signal flow
+-----------
+
+.. image:: _static/phase_shift_flow.svg
+   :alt: Phase shift measurement data flow
+   :width: 720
+
+Key steps
+---------
+
+1. Collect `SIGNAL_LENGTH` samples for each input.
+2. Run `arm_correlate_f32` to compute cross-correlation.
+3. Find the peak index and convert to time delay.
+4. Convert time delay to phase in degrees.
